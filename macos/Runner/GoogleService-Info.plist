@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>993892131921-7dev0ibkndn5c1g5badh8ip4fnuvrvq3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.993892131921-7dev0ibkndn5c1g5badh8ip4fnuvrvq3</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>993892131921-q11r7beqqulj5vobl89claggsl7npi8b.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDkZGvbLDRPjfEO5ZmYBs25e9AgW9mptD0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>993892131921</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.bagblissAdmin.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>bagbliss-d9793</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bagbliss-d9793.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:993892131921:ios:b107457919ea2b778cc470</string>
+</dict>
+</plist>
