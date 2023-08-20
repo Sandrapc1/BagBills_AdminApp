@@ -1,7 +1,7 @@
 // ignore_for_file: unused_local_variable, prefer_typing_uninitialized_variables
 import 'dart:developer';
-import 'package:bagbliss_admin/colors/colors.dart';
-import 'package:bagbliss_admin/screen/addproducts/image_picker.dart';
+import 'package:bagbliss_admin/core/colors.dart';
+import 'package:bagbliss_admin/screen/addproducts/function.dart';
 import 'package:bagbliss_admin/screen/addproducts/widgets/row_costume_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -157,18 +157,19 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   height: height * 0.02,
                 ),
                 CostumRow(
-                    labelText1: 'Category',
-                    controller1: categorycontoller,
+
+                    // labelText1: 'Category',
+                    // controller1: categorycontoller,
                     labelText2: 'Quantity',
-                    controller2: quantitycontoller),
+                    controller2: quantitycontoller, dropdownList: Categorys,),
                 SizedBox(
                   height: height * 0.02,
                 ),
                 CostumRow(
-                  labelText1: 'Size',
-                  controller1: sizecontoller,
+                  // labelText1: 'Size',
+                  // controller1: sizecontoller,
                   labelText2: 'Price',
-                  controller2: pricecontoller,
+                  controller2: pricecontoller, dropdownList: sizes,
                 ),
                   SizedBox(
                   height: height * 0.02,

@@ -1,4 +1,4 @@
-import 'package:bagbliss_admin/colors/colors.dart';
+import 'package:bagbliss_admin/core/colors.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatelessWidget {

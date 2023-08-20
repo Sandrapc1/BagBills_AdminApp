@@ -1,7 +1,7 @@
 
 // ignore_for_file: unused_local_variable
 
-import 'package:bagbliss_admin/colors/colors.dart';
+import 'package:bagbliss_admin/core/colors.dart';
 // import 'package:bagbliss_admin/screen/addproducts/image_picker.dart';
 import 'package:bagbliss_admin/screen/admin/admin_login.dart';
 import 'package:bagbliss_admin/screen/home/screen/order_screen.dart';

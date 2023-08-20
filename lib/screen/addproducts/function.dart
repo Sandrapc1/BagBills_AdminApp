@@ -65,7 +65,15 @@ Future<void> uploadImagesToFirebase(
     }
       }
 
+ RxString dropdowngetx=''.obs;
+      void setSelectedCategorys( String category){
+       dropdowngetx.value=category;
+      }
 
+ RxString dropdownsizegetx=''.obs;
+      void setSelectedSize( String category){
+       dropdownsizegetx.value=category;
+      }
 
       RxString dropgetx=''.obs;
       void setSelectedBrand( String brand){

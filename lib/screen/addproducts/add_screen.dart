@@ -2,8 +2,8 @@
 
 import 'dart:developer';
 import 'dart:io';
-import 'package:bagbliss_admin/colors/colors.dart';
-import 'package:bagbliss_admin/screen/addproducts/image_picker.dart';
+import 'package:bagbliss_admin/core/colors.dart';
+import 'package:bagbliss_admin/screen/addproducts/function.dart';
 import 'package:bagbliss_admin/screen/addproducts/widgets/row_costume_widget.dart';
 import 'package:bagbliss_admin/screen/home/homescreen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -15,6 +15,21 @@ import 'widgets/build_textfield.dart';
 
 // final GlobalKey<FormState> _formkeys=GlobalKey<FormState>();
 final brands = ['Baggit', 'Allen Solly', 'H&M', 'Saint Laurent'];
+final Categorys = [
+  'Cross Bag',
+  'Tote Bag',
+  'Shoulder Bag',
+  'Clutches Bag',
+  'Messengerr Bag'
+];
+final sizes = [
+  'X',
+  'M',
+  'S',
+  'XL',
+  'XXL',
+];
+
 TextEditingController productcontoller = TextEditingController();
 TextEditingController categorycontoller = TextEditingController();
 TextEditingController quantitycontoller = TextEditingController();
@@ -138,16 +153,15 @@ class AddproductsScreen extends StatelessWidget {
                   height: height * 0.02,
                 ),
                 CostumRow(
-                    labelText1: 'Category',
-                    controller1: categorycontoller,
-                    labelText2: 'Quantity',
-                    controller2: quantitycontoller),
+                  dropdownList: Categorys,
+                  labelText2: 'Quantity',
+                  controller2: quantitycontoller,
+                ),
                 SizedBox(
                   height: height * 0.02,
                 ),
                 CostumRow(
-                  labelText1: 'Size',
-                  controller1: sizecontoller,
+                  dropdownList: sizes,
                   labelText2: 'Price',
                   controller2: pricecontoller,
                 ),
@@ -156,17 +170,18 @@ class AddproductsScreen extends StatelessWidget {
                 ),
                 const Text('Brands'),
                 Obx(() => Container(
-                  height: height*0.06,
-                  alignment: Alignment.center,
-                  decoration: 
-                  BoxDecoration(border: Border.all(color: const Color.fromARGB(255, 90, 89, 89)),
-                  borderRadius: BorderRadius.circular(5)),
-                  child: DropdownButton<String>(
+                      height: height * 0.06,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: const Color.fromARGB(255, 90, 89, 89)),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: DropdownButton<String>(
                         value: imagePickerController.dropgetx.value.isNotEmpty
                             ? imagePickerController.dropgetx.value
                             : null,
-                        items:
-                            brands.map<DropdownMenuItem<String>>((String value) {
+                        items: brands
+                            .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem(
                             value: value,
                             child: Text(value),
@@ -179,7 +194,7 @@ class AddproductsScreen extends StatelessWidget {
                           }
                         },
                       ),
-                )),
+                    )),
 
                 //  BuildTextField(
                 //     labelText: 'Brand', controller: brandcontroller),
@@ -207,8 +222,7 @@ class AddproductsScreen extends StatelessWidget {
                           id: bags.id,
                           description: descriptioncontoller.text,
                           image: imagePickerController.downloadURLs,
-                          brand: imagePickerController.dropgetx.toString()
-                          ));
+                          brand: imagePickerController.dropgetx.toString()));
                       imagePickerController.imagelist.clear();
                       imagePickerController.downloadURLs.clear();
                       log(imagePickerController.imagelist.toString());
@@ -230,7 +244,7 @@ class AddproductsScreen extends StatelessWidget {
                       pricecontoller.clear();
                       descriptioncontoller.clear();
                       brands.clear();
-                      
+
                       // }
                       // Get.back();
                     },

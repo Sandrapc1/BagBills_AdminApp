@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'colors/colors.dart';
+import 'core/colors.dart';
 import 'firebase_options.dart';
 
 Future <void> main() async {

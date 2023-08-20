@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../colors/colors.dart';
+import '../../../core/colors.dart';
 import 'succes.dart';
 
 TextEditingController restcontroller = TextEditingController();
