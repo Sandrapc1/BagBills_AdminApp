@@ -1,34 +1,14 @@
-// ignore_for_file: avoid_print
-
+// ignore_for_file: unused_local_variable, prefer_typing_uninitialized_variables
 import 'dart:developer';
-import 'dart:io';
 import 'package:bagbliss_admin/core/colors.dart';
-import 'package:bagbliss_admin/screen/addproducts/function.dart';
-import 'package:bagbliss_admin/screen/addproducts/widgets/row_costume_widget.dart';
-import 'package:bagbliss_admin/screen/home/homescreen.dart';
+import 'package:bagbliss_admin/controller/function.dart';
+import 'package:bagbliss_admin/view/addproducts/widgets/row_costume_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../models/product_details.dart';
-import 'widgets/build_textfield.dart';
-
-// final GlobalKey<FormState> _formkeys=GlobalKey<FormState>();
-final brands = ['Baggit', 'Allen Solly', 'H&M', 'Saint Laurent'];
-final Categorys = [
-  'Cross Bag',
-  'Tote Bag',
-  'Shoulder Bag',
-  'Clutches Bag',
-  'Messengerr Bag'
-];
-final sizes = [
-  'X',
-  'M',
-  'S',
-  'XL',
-  'XXL',
-];
+import '../addproducts/add_screen.dart';
+import '../addproducts/widgets/build_textfield.dart';
 
 TextEditingController productcontoller = TextEditingController();
 TextEditingController categorycontoller = TextEditingController();
@@ -36,29 +16,50 @@ TextEditingController quantitycontoller = TextEditingController();
 TextEditingController sizecontoller = TextEditingController();
 TextEditingController pricecontoller = TextEditingController();
 TextEditingController descriptioncontoller = TextEditingController();
+TextEditingController brandcontroller = TextEditingController();
 final CarouselController _controller = CarouselController();
-late String imageUrl1;
 
-class AddproductsScreen extends StatelessWidget {
-  AddproductsScreen({
-    Key? key,
-  }) : super(key: key);
+// collection reference(product)
 
-  final bags = FirebaseFirestore.instance.collection('products').doc();
-  final imagePickerController = Get.put(ImagePickerController());
+final CollectionReference bags =
+    FirebaseFirestore.instance.collection('products');
+final imagePickerController = Get.put(ImagePickerController());
 
-  Future<void> addproducts(ProductDetails details) async {
-    bags.set({
-      'name': details.name,
-      'category': details.category,
-      'quantity': details.quantity,
-      'size': details.size,
-      'price': details.price,
-      'id': details.id,
-      'description': details.description,
-      'image': details.image,
-      'brand': details.brand,
-    });
+Future<void> updateproduct(docId) async {
+  final data = {
+    'name': productcontoller.text,
+    'category': imagePickerController.dropdowngetx.value,
+    'quantity': quantitycontoller.text,
+    'size': imagePickerController.dropdownsizegetx.value,
+    'price': pricecontoller.text,
+    'description': descriptioncontoller.text,
+    'image': imagePickerController.downloadURLs,
+    'brand':imagePickerController.dropgetx.value,
+  };
+  bags.doc(docId).update(data).then((value) => Get.back());
+}
+
+class EditProductScreen extends StatefulWidget {
+  const EditProductScreen({Key? key, required this.snap}) : super(key: key);
+  final snap;
+
+  @override
+  State<EditProductScreen> createState() => _EditProductScreenState();
+}
+
+class _EditProductScreenState extends State<EditProductScreen> {
+  @override
+  void initState() {
+    productcontoller.text = widget.snap['name'];
+    categorycontoller.text = widget.snap['category'];
+    quantitycontoller.text = widget.snap['quantity'];
+    sizecontoller.text = widget.snap['size'];
+    pricecontoller.text = widget.snap['price'];
+    descriptioncontoller.text = widget.snap['description'];
+    //imagePickerController.imagelist = widget.snap['image'];
+    imagePickerController.downloadURLs = widget.snap['image'];
+    brandcontroller.text=widget.snap['brand'];
+    super.initState();
   }
 
   @override
@@ -71,7 +72,7 @@ class AddproductsScreen extends StatelessWidget {
           backgroundColor: appbar,
           iconTheme: const IconThemeData(color: white),
           title: const Text(
-            'Add Product',
+            ' Update Product',
             style: TextStyle(color: white, fontWeight: FontWeight.bold),
           ),
         ),
@@ -81,8 +82,8 @@ class AddproductsScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Obx(() => CarouselSlider.builder(
-                      itemCount: imagePickerController.imagelist.length,
+                CarouselSlider.builder(
+                      itemCount: imagePickerController.downloadURLs.length,
                       itemBuilder:
                           (BuildContext context, int index, int realIndex) {
                         return Container(
@@ -91,8 +92,8 @@ class AddproductsScreen extends StatelessWidget {
                           child: Stack(
                             children: [
                               Image(
-                                image: FileImage(File(
-                                    imagePickerController.imagelist[index])),
+                                image: NetworkImage(
+                                    imagePickerController.downloadURLs[index]),
                               ),
                               const SizedBox(
                                 height: 20,
@@ -104,8 +105,10 @@ class AddproductsScreen extends StatelessWidget {
                                   backgroundColor: white,
                                   child: IconButton(
                                     onPressed: () {
+                                      log(imagePickerController.downloadURLs.toString());
                                       imagePickerController
-                                          .removeImageAtIndex(index);
+                                          .removeUpdateIndex(index);
+                                          log(imagePickerController.downloadURLs.toString());
                                     },
                                     icon: const Icon(
                                       Icons.delete,
@@ -127,7 +130,7 @@ class AddproductsScreen extends StatelessWidget {
                         aspectRatio: 2.0,
                         initialPage: 1,
                       ),
-                    )),
+                    ),
                 SizedBox(
                   height: height * 0.02,
                 ),
@@ -137,6 +140,7 @@ class AddproductsScreen extends StatelessWidget {
                             (states) => const Color(0xFF00B2B6))),
                     onPressed: () async {
                       await imagePickerController.takePhoto();
+                      log(imagePickerController.imagelist.toString());
                       //  imagePickerController.uploadImagesToFirebase(imagelist,context );
                       log(imagePickerController.imagelist.length.toString());
                     },
@@ -152,20 +156,63 @@ class AddproductsScreen extends StatelessWidget {
                 SizedBox(
                   height: height * 0.02,
                 ),
-                CostumRow(
-                  dropdownList: Categorys,
-                  labelText2: 'Quantity',
-                  controller2: quantitycontoller,
+                   Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Obx(
+                      () => DropdownButton<String>(
+                        value:
+                            imagePickerController.dropdowngetx.value.isNotEmpty
+                                ? imagePickerController.dropdowngetx.value
+                                : null,
+                        items: categorys.map<DropdownMenuItem<String>>(
+                            (String value) {
+                          return DropdownMenuItem(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (newvalues) {
+                          if (newvalues != null) {
+                            imagePickerController
+                                .setSelectedCategorys(newvalues);
+                          }
+                        },
+                      ),
+                    ),
+                    Obx(
+                      () => DropdownButton<String>(
+                       
+                        value: imagePickerController
+                                .dropdownsizegetx.value.isNotEmpty
+                            ? imagePickerController.dropdownsizegetx.value
+                            : null,
+                        items:
+                            sizes.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (newvalues) {
+                          if (newvalues != null) {
+                            imagePickerController.setSelectedSize(newvalues);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: height * 0.02,
                 ),
                 CostumRow(
-                  dropdownList: sizes,
                   labelText2: 'Price',
-                  controller2: pricecontoller,
+                  controller2: pricecontoller, 
+                   labelTextquantity: 'Quantity', 
+                   quantityTextController: quantitycontoller,
                 ),
-                SizedBox(
+                  SizedBox(
                   height: height * 0.02,
                 ),
                 const Text('Brands'),
@@ -189,15 +236,11 @@ class AddproductsScreen extends StatelessWidget {
                         }).toList(),
                         onChanged: (newvalue) {
                           if (newvalue != null) {
-                            print(newvalue);
                             imagePickerController.setSelectedBrand(newvalue);
                           }
                         },
                       ),
                     )),
-
-                //  BuildTextField(
-                //     labelText: 'Brand', controller: brandcontroller),
                 SizedBox(
                   height: height * 0.02,
                 ),
@@ -211,45 +254,14 @@ class AddproductsScreen extends StatelessWidget {
                         shape: const LinearBorder(),
                         fixedSize: Size(width, 50),
                         backgroundColor: appbar),
-                    onPressed: () async {
-                      log(imagePickerController.imagelist.toString());
-                      await addproducts(ProductDetails(
-                          name: productcontoller.text,
-                          category: categorycontoller.text,
-                          quantity: quantitycontoller.text,
-                          size: sizecontoller.text,
-                          price: pricecontoller.text,
-                          id: bags.id,
-                          description: descriptioncontoller.text,
-                          image: imagePickerController.downloadURLs,
-                          brand: imagePickerController.dropgetx.toString()));
-                      imagePickerController.imagelist.clear();
-                      imagePickerController.downloadURLs.clear();
-                      log(imagePickerController.imagelist.toString());
+                    onPressed: () {
+                      updateproduct(widget.snap['id']);
                       Get.back();
-
-                      // if (imagePickerController.imagelist.isEmpty) {
-                      //   Get.snackbar('', 'Please add the Image',colorText: red);
-                      //   log(imagePickerController.imagelist.length.toString()
-
-                      //   );
-                      // return;
-
-                      Get.to(const HomeScreen());
-                      imagePickerController.clear();
-                      productcontoller.clear();
-                      categorycontoller.clear();
-                      quantitycontoller.clear();
-                      sizecontoller.clear();
-                      pricecontoller.clear();
-                      descriptioncontoller.clear();
-                      brands.clear();
-
-                      // }
-                      // Get.back();
+                      // updateproduct(docId);
+                      // print(args);
                     },
                     child: const Text(
-                      'SAVE',
+                      'UPDATE',
                       style: TextStyle(color: white),
                     ))
               ],

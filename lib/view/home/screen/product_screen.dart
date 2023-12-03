@@ -1,7 +1,7 @@
 // ignore_for_file: unused_local_variable, avoid_unnecessary_containers
 import 'dart:developer';
 import 'package:bagbliss_admin/core/colors.dart';
-import 'package:bagbliss_admin/screen/update/update_product.dart';
+import 'package:bagbliss_admin/view/update/update_product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

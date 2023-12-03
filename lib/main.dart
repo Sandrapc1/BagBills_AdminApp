@@ -1,6 +1,6 @@
 
-import 'package:bagbliss_admin/screen/admin/admin_login.dart';
-import 'package:bagbliss_admin/screen/home/homescreen.dart';
+import 'package:bagbliss_admin/view/admin_sigin/admin_login.dart';
+import 'package:bagbliss_admin/view/home/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

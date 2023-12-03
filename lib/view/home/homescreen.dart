@@ -3,11 +3,11 @@
 
 import 'package:bagbliss_admin/core/colors.dart';
 // import 'package:bagbliss_admin/screen/addproducts/image_picker.dart';
-import 'package:bagbliss_admin/screen/admin/admin_login.dart';
-import 'package:bagbliss_admin/screen/home/screen/order_screen.dart';
-import 'package:bagbliss_admin/screen/home/screen/product_screen.dart';
-import 'package:bagbliss_admin/screen/search/search.dart';
-import 'package:bagbliss_admin/screen/update/update_product.dart';
+import 'package:bagbliss_admin/view/admin_sigin/admin_login.dart';
+import 'package:bagbliss_admin/view/home/screen/order_screen.dart';
+import 'package:bagbliss_admin/view/home/screen/product_screen.dart';
+import 'package:bagbliss_admin/view/search/search.dart';
+import 'package:bagbliss_admin/view/update/update_product.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

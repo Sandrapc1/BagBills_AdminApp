@@ -1,7 +1,7 @@
 
 // ignore_for_file: non_constant_identifier_names, avoid_print
 
-import 'package:bagbliss_admin/screen/home/homescreen.dart';
+import 'package:bagbliss_admin/view/home/homescreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 

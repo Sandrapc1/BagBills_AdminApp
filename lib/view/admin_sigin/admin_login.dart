@@ -1,8 +1,8 @@
 // ignore_for_file: body_might_complete_normally_nullable, unused_local_variable, must_be_immutable
-import 'package:bagbliss_admin/auth/auth.dart';
-import 'package:bagbliss_admin/auth/validation.dart';
+import 'package:bagbliss_admin/controller/auth/auth.dart';
+import 'package:bagbliss_admin/controller/auth/validation.dart';
 import 'package:bagbliss_admin/core/colors.dart';
-import 'package:bagbliss_admin/screen/admin/controller.dart';
+import 'package:bagbliss_admin/view/admin_sigin/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
